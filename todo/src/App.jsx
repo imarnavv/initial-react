@@ -4,7 +4,10 @@ import { TodoProvider } from "./contexts/TodoContext";
 import { TodoForm, TodoItem } from "./components";
 
 function App() {
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState(() => {
+    const storedTodos = localStorage.getItem("todos")
+    return storedTodos ? JSON.parse(storedTodos) : []
+  })
 
   const addTodo = (todo) => {
     setTodos((prev) => [{id: Date.now(), ...todo}, ...prev])
@@ -21,14 +24,6 @@ function App() {
   const toggleComplete = (id) => {
     setTodos((prev) => prev.map((prevTodo) => prevTodo.id === id? !prevTodo.completed : prevTodo))
   }
-
-  useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem('todos'))
-
-    if (todos && todos.length > 0){
-      setTodos(todos)
-    }
-  }, [])
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
