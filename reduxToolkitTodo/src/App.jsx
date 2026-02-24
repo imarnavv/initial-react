@@ -5,11 +5,13 @@ import Todos from './components/todos'
 
 function App() {
   return (
-    <>
-      <h1>ghuiya ka khet</h1>
-      <AddTodo/>
-      <Todos/>
-    </>
+    <div className="app">
+      <div className="todo-container">
+        <h1>Redux Toolkit Todo</h1>
+        <AddTodo />
+        <Todos />
+      </div>
+    </div>
   )
 }
 
